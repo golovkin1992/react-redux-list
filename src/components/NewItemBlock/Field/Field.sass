@@ -1,0 +1,27 @@
+.field
+  position: relative
+  height: 46px
+  &__input
+    box-sizing: border-box
+    width: 185px
+    border: 0
+    height: 70%
+    font-size: 16px
+    border-bottom: 2px solid #c8ccd4
+    border-radius: 0
+    transition: all 0.15s ease
+    &:not(:placeholder-shown) + .field__label 
+      transform: translateY(-15px) scale(0.75)
+      display: block
+    &:focus
+      outline: none
+  &__label
+    position: absolute
+    display: none
+    top: 5px
+    left: 0
+    font-size: 16px
+    font-weight: 500
+    transform-origin: 0 0
+    transition: all 0.2s ease
+    transform: translateY(0)
