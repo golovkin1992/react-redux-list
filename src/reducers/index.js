@@ -1,5 +1,7 @@
+import generateID from '../utils/generateID';
+
 const initialState = {
-  newItem: {
+  newBook: {
     title: '',
     country: 'Выберите',
     language: '',
@@ -8,23 +10,23 @@ const initialState = {
     year: '',
   },
   filter: '',
-  items: JSON.parse(localStorage.getItem('books')) || [],
+  books: JSON.parse(localStorage.getItem('books')) || [],
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
-  const { items } = state;
+  const { books } = state;
   switch (type) {
-    case 'CHANGE_NEW_ITEM': {
+    case 'CHANGE_NEW_BOOK': {
       const { name, value } = payload;
-      const { newItem } = state;
-      return { ...state, newItem: { ...newItem, [name]: value } };
+      const { newBook } = state;
+      return { ...state, newBook: { ...newBook, [name]: value } };
     }
-    case 'ADD_NEW_ITEM': {
-      const item = Object.assign({ id: String(items.length + 1) }, payload);
+    case 'ADD_NEW_BOOK': {
+      const book = Object.assign({ id: generateID() }, payload);
       const newState = {
         ...state,
-        newItem: {
+        newBook: {
           author: '',
           country: '',
           language: '',
@@ -32,32 +34,32 @@ export default (state = initialState, action) => {
           title: '',
           year: '',
         },
-        items: [...items, item],
+        books: [...books, book],
       };
-      localStorage.setItem('books', JSON.stringify(newState.items));
+      localStorage.setItem('books', JSON.stringify(newState.books));
       return newState;
     }
     case 'CHANGE_FILTER': {
       return { ...state, filter: payload };
     }
-    case 'CHANGE_ITEM_PROPERTY': {
+    case 'CHANGE_BOOK_PROPERTY': {
       const { id, editableField, text } = payload;
-      const index = items.findIndex(el => el.id === id);
-      const updatedObj = Object.assign({}, { ...items[index], [editableField]: text });
+      const index = books.findIndex(el => el.id === id);
+      const updatedObj = Object.assign({}, { ...books[index], [editableField]: text });
       const newState = {
         ...state,
-        items: [
-          ...items.slice(0, index),
+        books: [
+          ...books.slice(0, index),
           updatedObj,
-          ...items.slice(index + 1),
+          ...books.slice(index + 1),
         ],
       };
-      localStorage.setItem('books', JSON.stringify(newState.items));
+      localStorage.setItem('books', JSON.stringify(newState.books));
       return newState;
     }
-    case 'DELETE_ITEM': {
-      const newState = { ...state, items: items.filter(el => el.id !== payload) };
-      localStorage.setItem('books', JSON.stringify(newState.items));
+    case 'DELETE_BOOK': {
+      const newState = { ...state, books: books.filter(el => el.id !== payload) };
+      localStorage.setItem('books', JSON.stringify(newState.books));
       return newState;
     }
     default:

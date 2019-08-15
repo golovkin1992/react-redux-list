@@ -5,8 +5,8 @@ import './Field.sass';
 export default class Field extends PureComponent {
   handleChange = (e) => {
     const { value } = e.target;
-    const { onChangeNewItem, name } = this.props;
-    onChangeNewItem(name, value);
+    const { onChangeNewBook, name } = this.props;
+    onChangeNewBook(name, value);
   }
 
   render() {
@@ -61,7 +61,7 @@ export default class Field extends PureComponent {
   }
 }
 Field.propTypes = {
-  onChangeNewItem: PropTypes.func.isRequired,
+  onChangeNewBook: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,

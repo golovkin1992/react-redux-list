@@ -1,46 +1,42 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import NewItemBlock from '../NewItemBlock';
-import ItemsList from '../ItemsList';
+import NewBookBlock from '../NewBookBlock';
+import BooksList from '../BooksList';
 import SearchBlock from '../SearchBlock';
 import './App.sass';
 
 const App = ({
-  newItem,
-  changeNewItem,
-  addNewItem,
+  newBook,
+  changeNewBook,
+  addNewBook,
   hasEmptyFields,
   changeFilter,
-  filter,
-  filterItems,
-  deleteItem,
+  filterBooks,
+  deleteBook,
 }) => (
   <div className="wrap">
     <SearchBlock
       onChangeFilter={changeFilter}
-      value={filter}
     />
-    <NewItemBlock
-      newItem={newItem}
-      onChangeNewItem={changeNewItem}
-      addNewItem={addNewItem}
+    <NewBookBlock
+      newBook={newBook}
+      onChangeNewBook={changeNewBook}
+      addNewBook={addNewBook}
       hasEmptyFields={hasEmptyFields}
     />
-    <ItemsList
-      filterItems={filterItems}
-      onDeleteItem={deleteItem}
+    <BooksList
+      filterBooks={filterBooks}
+      onDeleteBook={deleteBook}
     />
   </div>
 );
-
 App.propTypes = {
-  changeNewItem: PropTypes.func.isRequired,
-  addNewItem: PropTypes.func.isRequired,
-  deleteItem: PropTypes.func.isRequired,
+  changeNewBook: PropTypes.func.isRequired,
+  addNewBook: PropTypes.func.isRequired,
+  deleteBook: PropTypes.func.isRequired,
   changeFilter: PropTypes.func.isRequired,
-  filterItems: PropTypes.objectOf(PropTypes.object).isRequired,
-  newItem: PropTypes.objectOf(PropTypes.object).isRequired,
+  filterBooks: PropTypes.objectOf(PropTypes.object).isRequired,
+  newBook: PropTypes.objectOf(PropTypes.object).isRequired,
   hasEmptyFields: PropTypes.bool.isRequired,
-  filter: PropTypes.string.isRequired,
 };
 export default App;

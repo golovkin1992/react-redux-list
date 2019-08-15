@@ -1,28 +1,28 @@
 import { connect } from 'react-redux';
 import App from './App';
-import { getVisibleItems } from '../../selectors';
 import {
-  changeNewItemAction,
-  addNewItemAction,
+  getVisibleBooksSelector,
+  hasEmptyFieldsSelector,
+  getNewBookSelector,
+} from '../../selectors';
+import {
+  changeNewBookAction,
+  addNewBookAction,
   changeFilterAction,
-  deleteItemAction,
+  deleteBookAction,
 } from '../../actions/index';
 
-const hasEmptyFields = newItem => Object.keys(newItem).some(item => newItem[item] === '');
-
 const mapStateToProps = state => ({
-  newItem: state.newItem,
-  hasEmptyFields: hasEmptyFields(state.newItem),
-  filter: state.filter,
-  filterItems: getVisibleItems(state),
+  newBook: getNewBookSelector(state),
+  hasEmptyFields: hasEmptyFieldsSelector(state),
+  filterBooks: getVisibleBooksSelector(state),
 });
 
 export default
 connect(mapStateToProps,
   {
-    changeNewItem: changeNewItemAction,
-    addNewItem: addNewItemAction,
+    changeNewBook: changeNewBookAction,
+    addNewBook: addNewBookAction,
     changeFilter: changeFilterAction,
-    deleteItem: deleteItemAction,
-
+    deleteBook: deleteBookAction,
   })(App);

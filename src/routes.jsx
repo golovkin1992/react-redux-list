@@ -1,19 +1,19 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import App from './components/App';
-import Item from './components/ItemsList/Item';
+import AppContainer from './components/App';
+import Book from './components/BooksList/Book';
 import NotFound from './components/NotFound';
 
 const routes = (
   <Switch>
     <Route
       path="/"
-      component={App}
+      component={AppContainer}
       exact
     />
     <Route
-      path="/items/:id"
-      component={Item}
+      path="/books/:id"
+      component={Book}
       exact
     />
     <Route

@@ -1,14 +1,25 @@
 import { createSelector } from 'reselect';
 
 const getFilter = state => state.filter;
-const getItems = state => state.items;
+const getBooks = state => state.books;
+const getNewBook = state => state.newBook;
 
-export const getVisibleItems = createSelector(
-  [getFilter, getItems],
-  (filter, items) => {
+export const getVisibleBooksSelector = createSelector(
+  [getFilter, getBooks],
+  (filter, books) => {
     if (!filter || filter === '') {
-      return items;
-    } return items.filter(el => el.title.indexOf(filter) > -1);
+      return books;
+    }
+    return books.filter(el => el.title.indexOf(filter) > -1);
   },
 );
-export default getVisibleItems;
+
+export const hasEmptyFieldsSelector = createSelector(
+  [getNewBook],
+  newBook => Object.keys(newBook).some(item => newBook[item] === ''),
+);
+
+export const getNewBookSelector = createSelector(
+  [getNewBook],
+  newBook => newBook,
+);

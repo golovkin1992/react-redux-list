@@ -1,18 +1,18 @@
 import {
-  CHANGE_NEW_ITEM,
-  ADD_NEW_ITEM,
+  CHANGE_NEW_BOOK,
+  ADD_NEW_BOOK,
   CHANGE_FILTER,
-  CHANGE_ITEM_PROPERTY,
-  DELETE_ITEM,
+  CHANGE_BOOK_PROPERTY,
+  DELETE_BOOK,
 } from '../constants/ActionTypes';
 
-export const changeNewItemAction = (name, value) => (
-  { type: CHANGE_NEW_ITEM, payload: { name, value } });
-export const addNewItemAction = newItem => (
-  { type: ADD_NEW_ITEM, payload: newItem });
+export const changeNewBookAction = (name, value) => (
+  { type: CHANGE_NEW_BOOK, payload: { name, value } });
+export const addNewBookAction = newBOOK => (
+  { type: ADD_NEW_BOOK, payload: newBOOK });
 export const changeFilterAction = filter => (
   { type: CHANGE_FILTER, payload: filter });
-export const changeItemPropertyAction = (id, editableField, text) => (
-  { type: CHANGE_ITEM_PROPERTY, payload: { id, editableField, text } });
-export const deleteItemAction = id => (
-  { type: DELETE_ITEM, payload: id });
+export const changeBookPropertyAction = (id, editableField, text) => (
+  { type: CHANGE_BOOK_PROPERTY, payload: { id, editableField, text } });
+export const deleteBookAction = id => (
+  { type: DELETE_BOOK, payload: id });

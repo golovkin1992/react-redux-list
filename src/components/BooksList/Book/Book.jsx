@@ -2,27 +2,26 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { changeItemPropertyAction } from '../../../actions';
+import { changeBookPropertyAction } from '../../../actions';
 import fields from '../../../constants/Fields';
 import NotFound from '../../NotFound';
-import './Item.sass';
+import './Book.sass';
 
 
 const mapStateToProps = state => ({
-  items: state.items,
+  books: state.books,
 });
-class Item extends PureComponent {
+class Book extends PureComponent {
   state = {
-    item: null,
+    book: null,
     editableField: '',
   }
 
   inputFocusRef = React.createRef();
 
-
   componentDidMount() {
-    const { items, match } = this.props;
-    this.setState({ item: items.find(el => el.id === match.params.id) });
+    const { books, match: { params: { id } } } = this.props;
+    this.setState({ book: books.find(el => el.id === id) });
   }
 
   componentDidUpdate() {
@@ -46,68 +45,68 @@ class Item extends PureComponent {
   };
 
   handleInputEdit = (e) => {
-    const { editableField, item } = this.state;
-    const { changeItemProperty } = this.props;
-    const { id } = item;
+    const { editableField, book } = this.state;
+    const { changeBookProperty } = this.props;
+    const { id } = book;
     const text = e.target.value;
     if (!e.keyCode || e.keyCode === 13) {
-      if (item[editableField].length !== 0) {
-        changeItemProperty(id, editableField, text);
+      if (book[editableField].length !== 0) {
+        changeBookProperty(id, editableField, text);
         this.setState({ editableField: '' });
       }
     }
   };
 
    handleChange = (e) => {
-     const { editableField, item } = this.state;
+     const { editableField, book } = this.state;
      const text = e.target.value;
-     this.setState({ item: Object.assign({}, { ...item, [editableField]: text }) });
+     this.setState({ book: Object.assign({}, { ...book, [editableField]: text }) });
    }
 
    render() {
-     const { item, editableField } = this.state;
+     const { book, editableField } = this.state;
      return (
 
-       !item ? (
+       !book ? (
          <NotFound />
        ) : (
-         <div className="items-wrap">
+         <div className="books-wrap">
            {
       fields.map(field => (
-        <div className="item" key={field.name}>
-          <span className="item__title">{field.label}</span>
+        <div className="book" key={field.name}>
+          <span className="book__title">{field.label}</span>
           {
            editableField === field.name ? (
              <input
-               className="item__edit"
+               className="book__edit"
                type="text"
                ref={this.inputFocusRef}
-               value={item[field.name]}
+               value={book[field.name]}
                onChange={this.handleChange}
                onBlur={this.handleBlur}
                onKeyDown={this.handleKeyDown}
              />
            ) : (
              <span
-               className="item__value"
+               className="book__value"
                name={field.name}
                onDoubleClick={this.handleDblClick}
              >
-               {item[field.name]}
+               {book[field.name]}
              </span>
            )}
         </div>
       ))
       }
-           <Link className="link link_item" to="/"> Назад</Link>
+           <Link className="link link_book" to="/"> Назад</Link>
          </div>
        )
      );
    }
 }
-Item.propTypes = {
-  changeItemProperty: PropTypes.func.isRequired,
-  items: PropTypes.arrayOf(PropTypes.array).isRequired,
+Book.propTypes = {
+  changeBookProperty: PropTypes.func.isRequired,
+  books: PropTypes.arrayOf(PropTypes.array).isRequired,
   match: PropTypes.objectOf(PropTypes.object).isRequired,
 };
-export default connect(mapStateToProps, { changeItemProperty: changeItemPropertyAction })(Item);
+export default connect(mapStateToProps, { changeBookProperty: changeBookPropertyAction })(Book);

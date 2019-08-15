@@ -4,17 +4,17 @@ import Field from './Field';
 import fields from '../../constants/Fields';
 import './Fields.sass';
 
-export default class NewItemBlock extends Component {
+export default class NewBookBlock extends Component {
   handleClick = (e) => {
     e.preventDefault();
-    const { newItem, addNewItem } = this.props;
-    addNewItem(newItem);
+    const { newBook, addNewBook } = this.props;
+    addNewBook(newBook);
   }
 
   render() {
     const {
-      newItem,
-      onChangeNewItem,
+      newBook,
+      onChangeNewBook,
       hasEmptyFields,
     } = this.props;
     return (
@@ -23,9 +23,9 @@ export default class NewItemBlock extends Component {
           {fields.map(field => (
             <Field
               key={field.name}
-              onChangeNewItem={onChangeNewItem}
+              onChangeNewBook={onChangeNewBook}
               name={field.name}
-              value={newItem[field.name]}
+              value={newBook[field.name]}
               label={field.label}
               options={field.options}
               isDropDown={field.isDropDown}
@@ -45,9 +45,9 @@ export default class NewItemBlock extends Component {
     );
   }
 }
-NewItemBlock.propTypes = {
-  addNewItem: PropTypes.func.isRequired,
-  onChangeNewItem: PropTypes.func.isRequired,
+NewBookBlock.propTypes = {
+  addNewBook: PropTypes.func.isRequired,
+  onChangeNewBook: PropTypes.func.isRequired,
   hasEmptyFields: PropTypes.bool.isRequired,
-  newItem: PropTypes.objectOf(PropTypes.object).isRequired,
+  newBook: PropTypes.objectOf(PropTypes.object).isRequired,
 };
