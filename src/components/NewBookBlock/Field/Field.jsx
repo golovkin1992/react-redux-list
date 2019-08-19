@@ -28,7 +28,6 @@ export default class Field extends PureComponent {
               className="field__input"
               onBlur={this.handleChange}
               selected={value}
-              // value={value}
             >
               <option>Выберите</option>
               {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AppContainer from './components/App';
-import Book from './components/BooksList/Book';
+import BookDetails from './components/BookDetails';
 import NotFound from './components/NotFound';
 
 const routes = (
@@ -13,7 +13,7 @@ const routes = (
     />
     <Route
       path="/books/:id"
-      component={Book}
+      component={BookDetails}
       exact
     />
     <Route

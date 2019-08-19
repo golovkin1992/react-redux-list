@@ -4,51 +4,51 @@ import { withRouter } from 'react-router-dom';
 import './SearchBlock.sass';
 
 class SearchBlock extends PureComponent {
-  state= {
-    search: '',
-  }
-
   componentDidMount() {
-    const { history, onChangeFilter } = this.props;
-    this.unlisten = history.listen((location) => {
-      const { search } = location;
-      const params = new URLSearchParams(search);
-      const value = params.get('search');
-      if (value !== '') {
-        this.setState({ search: value });
-        onChangeFilter(value);
-      } else {
-        this.setState({ search: value });
-        history.push('/');
-        onChangeFilter(value);
-      }
-    });
+    this.handleLocationChange();
   }
 
   componentWillUnmount() {
     this.unlisten();
   }
 
+  getQueryParams = location => new URLSearchParams(location.search).get('search');
+
+  handleLocationChange = () => {
+    const { history, onChangeFilter } = this.props;
+    const { location } = history;
+    let value = this.getQueryParams(location);
+    if (!value) {
+      value = '';
+    }
+    onChangeFilter(value);
+    this.unlisten = history.listen((location) => {
+      let value = this.getQueryParams(location);
+      if (!value) {
+        value = '';
+      }
+      onChangeFilter(value);
+    });
+  }
+
   handleChange = (e) => {
-    const { onChangeFilter, history } = this.props;
+    const { history } = this.props;
     const { value } = e.target;
     if (value) {
       history.push({ search: `search=${value}` });
     } else history.push('/');
-    this.setState({ search: value });
-    onChangeFilter(value);
   }
 
   render() {
-    const { search } = this.state;
+    const { value } = this.props;
     return (
       <div className="search-field">
         <h1 className="header-title">Simple BookList</h1>
         <input
           className="search-input"
           onChange={this.handleChange}
-          type="text"
-          value={search}
+          type="search"
+          value={value}
           placeholder="Введите строку для поиска"
         />
       </div>
@@ -58,5 +58,6 @@ class SearchBlock extends PureComponent {
 SearchBlock.propTypes = {
   onChangeFilter: PropTypes.func.isRequired,
   history: PropTypes.objectOf(PropTypes.object).isRequired,
+  value: PropTypes.string.isRequired,
 };
 export default withRouter(SearchBlock);

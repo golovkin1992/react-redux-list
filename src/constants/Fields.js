@@ -4,23 +4,23 @@ import countries from './Countries';
 const fields = [
   {
     name: 'title',
-    label: 'Название',
+    label: 'Название:',
   },
   {
     name: 'country',
-    label: 'Страна издания',
+    label: 'Страна издания:',
     isDropDown: true,
     options: countries,
   },
   {
     name: 'language',
-    label: 'Язык',
+    label: 'Язык:',
     isDropDown: true,
     options: languages,
   },
   {
     name: 'pages',
-    label: 'Страниц',
+    label: 'Страниц:',
   },
   {
     name: 'author',

@@ -1,44 +1,22 @@
-import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
-import './BooksList.sass';
+import Book from './Book';
+import './BookList.sass';
 
-export class BooksList extends PureComponent {
-  handleClick = (e) => {
-    e.preventDefault();
-    const id = e.target.value;
-    const { onDeleteBook } = this.props;
-    onDeleteBook(id);
-  }
+const BooksList = ({ visibleBooks, onDeleteBook }) => {
+  const elements = visibleBooks.map(book => (
+    <Book
+      key={book.id}
+      id={book.id}
+      title={book.title}
+      onDeleteBook={onDeleteBook}
+    />
+  ));
+  return <ul className="book-list">{elements}</ul>;
+};
 
-  render() {
-    const { filterBooks } = this.props;
-    return (
-      <ul className="book-list">
-        {
-        filterBooks.map(book => (
-          <li key={book.id}>
-            <div className="book-item">
-              <div className="cover" />
-              <Link className="link" to={`/books/${book.id}`}>
-                <h1 className="title">{book.title}</h1>
-              </Link>
-              <button
-                type="submit"
-                value={book.id}
-                onClick={this.handleClick}
-              >
-              X
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    );
-  }
-}
 BooksList.propTypes = {
   onDeleteBook: PropTypes.func.isRequired,
-  filterBooks: PropTypes.arrayOf(PropTypes.array).isRequired,
+  visibleBooks: PropTypes.arrayOf(PropTypes.array).isRequired,
 };
 export default BooksList;

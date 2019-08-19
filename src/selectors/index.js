@@ -4,7 +4,7 @@ const getFilter = state => state.filter;
 const getBooks = state => state.books;
 const getNewBook = state => state.newBook;
 
-export const getVisibleBooksSelector = createSelector(
+export const visibleBooksSelector = createSelector(
   [getFilter, getBooks],
   (filter, books) => {
     if (!filter || filter === '') {
@@ -19,7 +19,11 @@ export const hasEmptyFieldsSelector = createSelector(
   newBook => Object.keys(newBook).some(item => newBook[item] === ''),
 );
 
-export const getNewBookSelector = createSelector(
+export const newBookSelector = createSelector(
   [getNewBook],
   newBook => newBook,
+);
+export const filterSelector = createSelector(
+  [getFilter],
+  filter => filter,
 );

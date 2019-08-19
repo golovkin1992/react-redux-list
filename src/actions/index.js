@@ -8,8 +8,8 @@ import {
 
 export const changeNewBookAction = (name, value) => (
   { type: CHANGE_NEW_BOOK, payload: { name, value } });
-export const addNewBookAction = newBOOK => (
-  { type: ADD_NEW_BOOK, payload: newBOOK });
+export const addNewBookAction = newBook => (
+  { type: ADD_NEW_BOOK, payload: newBook });
 export const changeFilterAction = filter => (
   { type: CHANGE_FILTER, payload: filter });
 export const changeBookPropertyAction = (id, editableField, text) => (

@@ -1,29 +1,40 @@
 .books-wrap
   position: relative
   width: 600px
-  height: 350px
+  height: 320px
   margin: 0 auto
+
 .book
   width: 100%
-  font-size: 24px
+  font-size: 20px
   margin-top: 20px
   margin-left: 30px
   &:first-child
-    font-size: 40px
+    font-size: 30px
     font-weight: bold
     margin-left: 0
+    color: #165A5A
     & .book__title
       display: none
   &__value
     margin-left: 15px
+    border-bottom: 1px solid grey
+    font-style: italic
+    height: 30px
   &__edit
-    font-size: 24px
+    height: 20px
     margin-left: 15px
+    font-size: 20px
+    font-style: italic
+    &:focus
+      outline: none
+      border: .5px solid grey
 .link_book
   position: absolute
   bottom: 0
   left: 15px
-  font-size: 24px
+  font-size: 20px
+
     
 
       

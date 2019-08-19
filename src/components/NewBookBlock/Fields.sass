@@ -1,6 +1,26 @@
 .fields
-  width: 100%
-  height: 120px
+  float: left
+  width: 200px
+  height: 400px
   display: flex
-  flex-wrap: wrap
+  flex-direction: column
   justify-content: space-between
+.btn
+  &_add-book
+    width: 100px
+    height: 35px
+    background-color: #5cb85c
+    color: #fff
+    text-align: center
+    cursor: pointer
+    border: none
+    border-radius: 6px
+    &:hover
+      background-color: #449d44
+      transition: all 1s ease
+    &:disabled
+      opacity: 0.6
+      &:hover
+        background-color: #5cb85c
+     
+ 

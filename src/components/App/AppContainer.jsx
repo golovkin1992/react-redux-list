@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import App from './App';
 import {
-  getVisibleBooksSelector,
+  visibleBooksSelector,
   hasEmptyFieldsSelector,
-  getNewBookSelector,
+  filterSelector,
+  newBookSelector,
 } from '../../selectors';
 import {
   changeNewBookAction,
@@ -13,9 +14,10 @@ import {
 } from '../../actions/index';
 
 const mapStateToProps = state => ({
-  newBook: getNewBookSelector(state),
+  newBook: newBookSelector(state),
+  filter: filterSelector(state),
   hasEmptyFields: hasEmptyFieldsSelector(state),
-  filterBooks: getVisibleBooksSelector(state),
+  visibleBooks: visibleBooksSelector(state),
 });
 
 export default

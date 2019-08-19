@@ -11,21 +11,23 @@ const App = ({
   addNewBook,
   hasEmptyFields,
   changeFilter,
-  filterBooks,
+  visibleBooks,
   deleteBook,
+  filter,
 }) => (
   <div className="wrap">
     <SearchBlock
       onChangeFilter={changeFilter}
+      value={filter}
     />
     <NewBookBlock
       newBook={newBook}
       onChangeNewBook={changeNewBook}
-      addNewBook={addNewBook}
+      onAddNewBook={addNewBook}
       hasEmptyFields={hasEmptyFields}
     />
     <BooksList
-      filterBooks={filterBooks}
+      visibleBooks={visibleBooks}
       onDeleteBook={deleteBook}
     />
   </div>
@@ -35,8 +37,9 @@ App.propTypes = {
   addNewBook: PropTypes.func.isRequired,
   deleteBook: PropTypes.func.isRequired,
   changeFilter: PropTypes.func.isRequired,
-  filterBooks: PropTypes.objectOf(PropTypes.object).isRequired,
+  visibleBooks: PropTypes.objectOf(PropTypes.object).isRequired,
   newBook: PropTypes.objectOf(PropTypes.object).isRequired,
   hasEmptyFields: PropTypes.bool.isRequired,
+  filter: PropTypes.string.isRequired,
 };
 export default App;
