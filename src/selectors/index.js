@@ -3,8 +3,7 @@ import { createSelector } from 'reselect';
 const getFilter = state => state.filter;
 const getBooks = state => state.books;
 const getNewBook = state => state.newBook;
-const getId = (state, ownProps) => ownProps.match.params.id;
-
+const getBookId = (state, ownProps) => ownProps.match.params.id;
 
 export const visibleBooksSelector = createSelector(
   [getFilter, getBooks],
@@ -29,7 +28,7 @@ export const filterSelector = createSelector(
   getFilter,
   filter => filter,
 );
-export const bookSelector = createSelector(
-  [getBooks, getId],
+export const findBookSelector = createSelector(
+  [getBooks, getBookId],
   (books, id) => books.find(el => el.id === id),
 );

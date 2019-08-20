@@ -6,11 +6,10 @@ import { changeBookPropertyAction } from '../../actions';
 import fields from '../../constants/Fields';
 import NotFound from '../NotFound';
 import './BookDetails.sass';
-import { bookSelector } from '../../selectors';
-
+import { findBookSelector } from '../../selectors';
 
 const mapStateToProps = (state, ownProps) => ({
-  book: bookSelector(state, ownProps),
+  book: findBookSelector(state, ownProps),
 });
 class BookDetails extends PureComponent {
   state = {
@@ -18,11 +17,6 @@ class BookDetails extends PureComponent {
   }
 
   inputFocusRef = React.createRef();
-
-  /* /componentDidMount() {
-    const { books, match: { params: { id } }, other } = this.props;
-    this.setState({ book: books.find(el => el.id === id) });
-  }/ */
 
   componentDidUpdate() {
     const { editableField } = this.state;
@@ -50,7 +44,7 @@ class BookDetails extends PureComponent {
     const { id } = book;
     const text = e.target.value;
     if (!e.keyCode || e.keyCode === 13) {
-      if (book[editableField].length !== 0) {
+      if (book[editableField].length) {
         changeBookProperty(id, editableField, text);
         this.setState({ editableField: '' });
       }
@@ -63,7 +57,6 @@ class BookDetails extends PureComponent {
      const { id } = book;
      const text = e.target.value;
      changeBookProperty(id, editableField, text);
-     // this.setState({ book: Object.assign({}, { ...book, [editableField]: text }) });
    }
 
    render() {
@@ -99,7 +92,7 @@ class BookDetails extends PureComponent {
                 }
               </div>
             ))
-      }
+            }
            <Link className="link link_book" to="/"> Назад</Link>
          </div>
        ) : (

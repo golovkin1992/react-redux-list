@@ -9,7 +9,7 @@ class SearchBlock extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.unlisten();
+    this.unsubscribe();
   }
 
   getQueryParams = location => new URLSearchParams(location.search).get('search');
@@ -22,7 +22,7 @@ class SearchBlock extends PureComponent {
       value = '';
     }
     onChangeFilter(value);
-    this.unlisten = history.listen((location) => {
+    this.unsubscribe = history.listen((location) => {
       let value = this.getQueryParams(location);
       if (!value) {
         value = '';
