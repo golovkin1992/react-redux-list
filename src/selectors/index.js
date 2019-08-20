@@ -3,6 +3,8 @@ import { createSelector } from 'reselect';
 const getFilter = state => state.filter;
 const getBooks = state => state.books;
 const getNewBook = state => state.newBook;
+const getId = (state, ownProps) => ownProps.match.params.id;
+
 
 export const visibleBooksSelector = createSelector(
   [getFilter, getBooks],
@@ -15,15 +17,19 @@ export const visibleBooksSelector = createSelector(
 );
 
 export const hasEmptyFieldsSelector = createSelector(
-  [getNewBook],
+  getNewBook,
   newBook => Object.keys(newBook).some(item => newBook[item] === ''),
 );
 
 export const newBookSelector = createSelector(
-  [getNewBook],
+  getNewBook,
   newBook => newBook,
 );
 export const filterSelector = createSelector(
-  [getFilter],
+  getFilter,
   filter => filter,
+);
+export const bookSelector = createSelector(
+  [getBooks, getId],
+  (books, id) => books.find(el => el.id === id),
 );
