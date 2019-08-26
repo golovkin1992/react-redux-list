@@ -5,12 +5,15 @@ import {
   hasEmptyFieldsSelector,
   filterSelector,
   newBookSelector,
+  errorSelector,
+  isLoadingSelector,
 } from '../../selectors';
 import {
   changeNewBookAction,
-  addNewBookAction,
+  postBookRequestAction,
+  deleteBookRequestAction,
+  getBooksRequest,
   changeFilterAction,
-  deleteBookAction,
 } from '../../actions/index';
 
 const mapStateToProps = state => ({
@@ -18,13 +21,16 @@ const mapStateToProps = state => ({
   filter: filterSelector(state),
   hasEmptyFields: hasEmptyFieldsSelector(state),
   visibleBooks: visibleBooksSelector(state),
+  isLoading: isLoadingSelector(state),
+  error: errorSelector(state),
 });
 
 export default
 connect(mapStateToProps,
   {
     changeNewBook: changeNewBookAction,
-    addNewBook: addNewBookAction,
+    postBook: postBookRequestAction,
+    deleteBook: deleteBookRequestAction,
+    getBooks: getBooksRequest,
     changeFilter: changeFilterAction,
-    deleteBook: deleteBookAction,
   })(App);

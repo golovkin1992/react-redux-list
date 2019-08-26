@@ -2,14 +2,25 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { changeBookPropertyAction } from '../../actions';
+import {
+  changeBookPropertyAction,
+  putBookRequestAction,
+  getBookRequestAction,
+} from '../../actions';
 import fields from '../../constants/Fields';
+import Preloader from '../Preloader';
 import NotFound from '../NotFound';
 import './BookDetails.sass';
-import { findBookSelector } from '../../selectors';
+import {
+  findBookSelector,
+  errorSelector,
+  isLoadingSelector,
+} from '../../selectors';
 
-const mapStateToProps = (state, ownProps) => ({
-  book: findBookSelector(state, ownProps),
+const mapStateToProps = state => ({
+  book: findBookSelector(state),
+  error: errorSelector(state),
+  isLoading: isLoadingSelector(state),
 });
 class BookDetails extends PureComponent {
   state = {
@@ -17,6 +28,12 @@ class BookDetails extends PureComponent {
   }
 
   inputFocusRef = React.createRef();
+
+  componentDidMount() {
+    const { match, getBook } = this.props;
+    const { id } = match.params;
+    getBook(id);
+  }
 
   componentDidUpdate() {
     const { editableField } = this.state;
@@ -40,12 +57,10 @@ class BookDetails extends PureComponent {
 
   handleInputEdit = (e) => {
     const { editableField } = this.state;
-    const { changeBookProperty, book } = this.props;
-    const { id } = book;
-    const text = e.target.value;
+    const { putBook, book } = this.props;
     if (!e.keyCode || e.keyCode === 13) {
       if (book[editableField].length) {
-        changeBookProperty(id, editableField, text);
+        putBook(book);
         this.setState({ editableField: '' });
       }
     }
@@ -53,57 +68,67 @@ class BookDetails extends PureComponent {
 
    handleChange = (e) => {
      const { editableField } = this.state;
-     const { changeBookProperty, book } = this.props;
-     const { id } = book;
+     const { changeBookProperty } = this.props;
      const text = e.target.value;
-     changeBookProperty(id, editableField, text);
+     changeBookProperty(editableField, text);
    }
 
    render() {
      const { editableField } = this.state;
-     const { book } = this.props;
+     const { book, isLoading, error } = this.props;
      return (
-       book ? (
-         <div className="books-wrap">
-           {
-            fields.map(field => (
-              <div className="book" key={field.name}>
-                <span className="book__title">{field.label}</span>
-                {
-                  editableField === field.name ? (
-                    <input
-                      className="book__edit"
-                      type="text"
-                      ref={this.inputFocusRef}
-                      value={book[field.name]}
-                      onChange={this.handleChange}
-                      onBlur={this.handleBlur}
-                      onKeyDown={this.handleKeyDown}
-                    />
-                  ) : (
-                    <span
-                      className="book__value"
-                      name={field.name}
-                      onDoubleClick={this.handleDblClick}
-                    >
-                      {book[field.name]}
-                    </span>
-                  )
-                }
-              </div>
-            ))
-            }
-           <Link className="link link_book" to="/"> Назад</Link>
-         </div>
-       ) : (
-         <NotFound />
-       )
+       isLoading ? <Preloader />
+         : (
+           !book ? <NotFound />
+             : (
+               <div className="books-wrap">
+                 {error && <p>Ошибка! {error}</p>}
+                 {
+                  fields.map(field => (
+                    <div className="book" key={field.name}>
+                      <span className="book__title">{field.label}</span>
+                      {
+                    editableField === field.name ? (
+                      <input
+                        className="book__edit"
+                        type="text"
+                        ref={this.inputFocusRef}
+                        value={book[field.name]}
+                        onChange={this.handleChange}
+                        onBlur={this.handleBlur}
+                        onKeyDown={this.handleKeyDown}
+                      />
+                    ) : (
+                      <span
+                        className="book__value"
+                        name={field.name}
+                        onDoubleClick={this.handleDblClick}
+                      >
+                        {book[field.name]}
+                      </span>
+                    )
+                  }
+                    </div>
+                  ))
+              }
+                 <Link className="link link_book" to="/"> Назад</Link>
+               </div>
+             )
+         )
      );
    }
 }
 BookDetails.propTypes = {
+  getBook: PropTypes.func.isRequired,
+  putBook: PropTypes.func.isRequired,
   changeBookProperty: PropTypes.func.isRequired,
   book: PropTypes.objectOf(PropTypes.object).isRequired,
+  match: PropTypes.objectOf(PropTypes.object).isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 export default connect(mapStateToProps,
-  { changeBookProperty: changeBookPropertyAction })(BookDetails);
+  {
+    changeBookProperty: changeBookPropertyAction,
+    putBook: putBookRequestAction,
+    getBook: getBookRequestAction,
+  })(BookDetails);

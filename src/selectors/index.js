@@ -1,9 +1,12 @@
 import { createSelector } from 'reselect';
 
 const getFilter = state => state.filter;
+const getError = state => state.error;
 const getBooks = state => state.books;
 const getNewBook = state => state.newBook;
-const getBookId = (state, ownProps) => ownProps.match.params.id;
+const getBook = state => state.book;
+const getIsLoading = state => state.isLoading;
+
 
 export const visibleBooksSelector = createSelector(
   [getFilter, getBooks],
@@ -24,11 +27,23 @@ export const newBookSelector = createSelector(
   getNewBook,
   newBook => newBook,
 );
+
 export const filterSelector = createSelector(
   getFilter,
   filter => filter,
 );
+
 export const findBookSelector = createSelector(
-  [getBooks, getBookId],
-  (books, id) => books.find(el => el.id === id),
+  getBook,
+  book => book,
+);
+
+export const errorSelector = createSelector(
+  getError,
+  error => error,
+);
+
+export const isLoadingSelector = createSelector(
+  getIsLoading,
+  isLoading => isLoading,
 );

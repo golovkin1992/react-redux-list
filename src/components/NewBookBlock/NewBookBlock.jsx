@@ -7,8 +7,8 @@ import './Fields.sass';
 export default class NewBookBlock extends Component {
   handleClick = (e) => {
     e.preventDefault();
-    const { newBook, onAddNewBook } = this.props;
-    onAddNewBook(newBook);
+    const { newBook, onPostBook } = this.props;
+    onPostBook(newBook);
   }
 
   render() {
@@ -16,6 +16,7 @@ export default class NewBookBlock extends Component {
       newBook,
       onChangeNewBook,
       hasEmptyFields,
+      isLoading,
     } = this.props;
     return (
       <div className="fields">
@@ -34,7 +35,7 @@ export default class NewBookBlock extends Component {
           className="btn btn_add-book"
           onClick={this.handleClick}
           type="submit"
-          disabled={hasEmptyFields}
+          disabled={hasEmptyFields || isLoading}
         >
           Добавить
         </button>
@@ -43,8 +44,9 @@ export default class NewBookBlock extends Component {
   }
 }
 NewBookBlock.propTypes = {
-  onAddNewBook: PropTypes.func.isRequired,
+  onPostBook: PropTypes.func.isRequired,
   onChangeNewBook: PropTypes.func.isRequired,
   hasEmptyFields: PropTypes.bool.isRequired,
   newBook: PropTypes.objectOf(PropTypes.object).isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
