@@ -11,21 +11,30 @@ export class Book extends PureComponent {
   }
 
   render() {
-    const { id, title } = this.props;
+    const { id, title, author } = this.props;
     return (
       <li>
-        <Link className="link" to={`/books/${id}`}>
-          <div className="book-item">
-            <div className="book-item__cover" />
-            <h1 className="book-item__title">{title}</h1>
+        <div className="book-item">
+          <div className="book-item__cover" />
+          <div className="book-item__buttons">
+            <Link
+              className="details"
+              to={`/books/${id}`}
+            >
+            Details
+            </Link>
             <button
               className="btn btn_delete-book"
               type="submit"
               value={id}
               onClick={this.handleClick}
-            />
+            >
+            Delete
+            </button>
           </div>
-        </Link>
+          <span className="book-item__title">{title}</span>
+          <span className="book-item__author">{author}</span>
+        </div>
       </li>
     );
   }
@@ -34,5 +43,6 @@ Book.propTypes = {
   onDeleteBook: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
 };
 export default Book;

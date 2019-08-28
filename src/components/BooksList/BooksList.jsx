@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Book from './Book';
 import './BookList.sass';
@@ -22,17 +22,21 @@ export default class BooksList extends PureComponent {
       isLoading ? (
         <Preloader />
       ) : (
-        <ul className="book-list">
-          {error && <p>Ошибка! {error}</p>}
-          { visibleBooks.map(book => (
-            <Book
-              key={book.id}
-              id={book.id}
-              title={book.title}
-              onDeleteBook={onDeleteBook}
-            />
-          ))}
-        </ul>
+        <Fragment>
+          <span className="title-book-list">Список книг:</span>
+          <ul className="book-list">
+            {error && <p>Ошибка! {error}</p>}
+            { visibleBooks.map(book => (
+              <Book
+                key={book.id}
+                id={book.id}
+                title={book.title}
+                author={book.author}
+                onDeleteBook={onDeleteBook}
+              />
+            ))}
+          </ul>
+        </Fragment>
       )
     );
   }

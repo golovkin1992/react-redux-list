@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import './SearchBlock.sass';
@@ -42,16 +42,20 @@ class SearchBlock extends PureComponent {
   render() {
     const { value } = this.props;
     return (
-      <div className="search-field">
-        <h1 className="header-title">Simple BookList</h1>
-        <input
-          className="search-input"
-          onChange={this.handleChange}
-          type="search"
-          value={value}
-          placeholder="Введите строку для поиска"
-        />
-      </div>
+      <Fragment>
+        <header>
+          <h1 className="header-title">Simple BookList</h1>
+        </header>
+        <div className="search-field">
+          <input
+            className="search-input"
+            onChange={this.handleChange}
+            type="search"
+            value={value}
+            placeholder="Введите название книги для поиска"
+          />
+        </div>
+      </Fragment>
     );
   }
 }

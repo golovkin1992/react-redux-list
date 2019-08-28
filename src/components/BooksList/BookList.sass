@@ -1,48 +1,66 @@
 .book-list
-  float: left
+  display: flex
+  flex-wrap: wrap
   list-style: none
   padding: 0
-  width: 400px
+  margin: 0
+.title-book-list
   margin-left: 20px
-
 .book-item
   display: flex
-  justify-content: space-between
+  flex-direction: column
   align-items: center
-  padding: 10px 0
-  border-bottom: 1px solid #458A8A
+  width: 200px
+  height: 280px
+  padding-top: 20px
   &__cover
-    width: 100px
-    height: 100px
-    background-image: url('../../assets/images/582710.jpg')
+    width: 160px
+    height: 200px
+    background-image: url('../../assets/images/cover1.svg')
     background-repeat: no-repeat
     background-position: center
+    &_details
+      width: 190px
+      height: 260px
+  &__buttons
+    font-size: 14px
+    margin-top: 5px
+    text-transform: uppercase
   &__title
+    margin-top: 15px
+    font-size: 20px
     color: #165A5A
+    word-break: break-all
+  &__author
+    margin-top: 10px
 .btn_delete-book
+  text-transform: uppercase
   background: none
-  color: 	#416868
   border: 0
-  font-size: 40px
-  outline: none
-  &:after 
-    display: block
-    content: "×"
+  font-size: 14px
   &:hover 
-    color: #458A8A
-.link
+    cursor: pointer
+    color: red
+.details
+  color: black
+  padding-right: 5px
+  border-right: 1px solid grey
+  &:hover
+    color: green
   &:visited
-    color: black
     text-decoration: none
   &:link
     color: black
     text-decoration: none
+    &:hover
+      color: green
+    
 .preloader-wrap
   width: 100%
   height: 100%
   position: fixed
   top: 0
-  left: 100px
+  left: 20px
   display: flex
   align-items: center
   align-content: center

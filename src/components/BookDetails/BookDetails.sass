@@ -1,19 +1,24 @@
-.books-wrap
-  position: relative
+.book-details
   width: 600px
-  height: 320px
-  margin: 0 auto
-
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin: 20px auto 0 auto
+  position: relative
+.books-wrap
+  width: 400px
+  height: 260px
+  margin-left: 15px
 .book
   width: 100%
   font-size: 20px
-  margin-top: 20px
-  margin-left: 30px
+  margin-top: 15px
   &:first-child
     font-size: 30px
     font-weight: bold
-    margin-left: 0
     color: #165A5A
+    & .book__value
+      margin-left: 0
     & .book__title
       display: none
   &__value
@@ -31,9 +36,17 @@
       border: .5px solid grey
 .link_book
   position: absolute
-  bottom: 0
-  left: 15px
+  left: 20px
+  top: 300px
   font-size: 20px
+  color: black
+  &:hover
+    color: green
+  &:visited
+    text-decoration: none
+  &:link
+    color: green
+    text-decoration: none
 
     
 

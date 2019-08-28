@@ -4,9 +4,7 @@ import {
   put,
   takeLatest,
 } from 'redux-saga/effects';
-import axios from 'axios';
 import generateID from '../utils/generateID';
-import url from '../constants/URL';
 import {
   GET_BOOKS_REQUEST,
   POST_BOOK_REQUEST,
@@ -22,10 +20,11 @@ import {
   getBookSuccessAction,
   failureAction,
 } from '../actions';
+import apiBooks from '../api';
 
 function* getBooks() {
   try {
-    const books = yield call(axios.get, url);
+    const books = yield call(apiBooks.getBooks);
     yield put(getBooksSuccessAction(books));
   } catch (e) {
     yield put(failureAction(e.message));
@@ -39,7 +38,7 @@ function* watchGetBooks() {
 function* postBook({ payload }) {
   try {
     const book = Object.assign({ id: generateID() }, payload);
-    yield call(axios.post, url, book);
+    yield call(apiBooks.postBook, book);
     yield put(postBookSuccessAction(book));
   } catch (e) {
     yield put(failureAction(e.message));
@@ -52,7 +51,7 @@ function* watchPostBook() {
 
 function* deleteBook({ payload }) {
   try {
-    yield call(axios.delete, `${url}/${payload}`);
+    yield call(apiBooks.deleteBook, payload);
     yield put(deleteBookSuccessAction(payload));
   } catch (e) {
     yield put(failureAction(e.message));
@@ -65,7 +64,7 @@ function* watchDeleteBook() {
 
 function* putBook({ payload }) {
   try {
-    yield call(axios.put, `${url}/${payload.id}`, payload);
+    yield call(apiBooks.putBook, payload);
     yield put(putBookSuccessAction(payload));
   } catch (e) {
     yield put(failureAction(e.message));
@@ -78,7 +77,7 @@ function* watchChangeBook() {
 
 function* getBook({ payload }) {
   try {
-    const response = yield call(axios.get, `${url}/${payload}`);
+    const response = yield call(apiBooks.getBook, payload);
     yield put(getBookSuccessAction(response));
   } catch (e) {
     yield put(failureAction(e.message));

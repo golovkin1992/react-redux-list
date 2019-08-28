@@ -22,6 +22,7 @@ const mapStateToProps = state => ({
   error: errorSelector(state),
   isLoading: isLoadingSelector(state),
 });
+
 class BookDetails extends PureComponent {
   state = {
     editableField: '',
@@ -81,9 +82,11 @@ class BookDetails extends PureComponent {
          : (
            !book ? <NotFound />
              : (
-               <div className="books-wrap">
-                 {error && <p>Ошибка! {error}</p>}
-                 {
+               <div className="book-details">
+                 <div className="book-item__cover book-item__cover_details" />
+                 <div className="books-wrap">
+                   {error && <p>Ошибка! {error}</p>}
+                   {
                   fields.map(field => (
                     <div className="book" key={field.name}>
                       <span className="book__title">{field.label}</span>
@@ -111,7 +114,8 @@ class BookDetails extends PureComponent {
                     </div>
                   ))
               }
-                 <Link className="link link_book" to="/"> Назад</Link>
+                   <Link className="link link_book" to="/"> Назад</Link>
+                 </div>
                </div>
              )
          )
@@ -125,6 +129,7 @@ BookDetails.propTypes = {
   book: PropTypes.objectOf(PropTypes.object).isRequired,
   match: PropTypes.objectOf(PropTypes.object).isRequired,
   isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
 };
 export default connect(mapStateToProps,
   {
