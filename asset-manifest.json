@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/react-redux-list/static/css/main.6b334688.chunk.css",
-    "main.js": "/react-redux-list/static/js/main.79157b48.chunk.js",
-    "main.js.map": "/react-redux-list/static/js/main.79157b48.chunk.js.map",
+    "main.css": "/react-redux-list/static/css/main.c8e62911.chunk.css",
+    "main.js": "/react-redux-list/static/js/main.1e570529.chunk.js",
+    "main.js.map": "/react-redux-list/static/js/main.1e570529.chunk.js.map",
     "runtime~main.js": "/react-redux-list/static/js/runtime~main.5988db2a.js",
     "runtime~main.js.map": "/react-redux-list/static/js/runtime~main.5988db2a.js.map",
-    "static/js/2.7086cc4a.chunk.js": "/react-redux-list/static/js/2.7086cc4a.chunk.js",
-    "static/js/2.7086cc4a.chunk.js.map": "/react-redux-list/static/js/2.7086cc4a.chunk.js.map",
+    "static/js/2.8e6ae7e2.chunk.js": "/react-redux-list/static/js/2.8e6ae7e2.chunk.js",
+    "static/js/2.8e6ae7e2.chunk.js.map": "/react-redux-list/static/js/2.8e6ae7e2.chunk.js.map",
     "index.html": "/react-redux-list/index.html",
-    "precache-manifest.a195ed7ece2dc0597fc1d1e1e6432450.js": "/react-redux-list/precache-manifest.a195ed7ece2dc0597fc1d1e1e6432450.js",
+    "precache-manifest.f173c4af0d0313fc4c951033237f5dd5.js": "/react-redux-list/precache-manifest.f173c4af0d0313fc4c951033237f5dd5.js",
     "service-worker.js": "/react-redux-list/service-worker.js",
-    "static/css/main.6b334688.chunk.css.map": "/react-redux-list/static/css/main.6b334688.chunk.css.map",
-    "static/media/BookList.sass": "/react-redux-list/static/media/582710.23f4d170.jpg",
+    "static/css/main.c8e62911.chunk.css.map": "/react-redux-list/static/css/main.c8e62911.chunk.css.map",
+    "static/media/BookList.sass": "/react-redux-list/static/media/cover1.52ace677.svg",
     "static/media/preloader.svg": "/react-redux-list/static/media/preloader.05457216.svg"
   }
 }
