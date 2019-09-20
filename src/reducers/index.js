@@ -1,17 +1,12 @@
+import { bookNormalizer } from '../normalize';
+
 const initialState = {
-  newBook: {
-    title: '',
-    country: '',
-    language: '',
-    pages: '',
-    author: '',
-    year: '',
-  },
   filter: '',
   books: [],
   book: null,
   isLoading: false,
   error: null,
+  bestBook: 4,
 };
 
 export default (state = initialState, action) => {
@@ -45,6 +40,8 @@ export default (state = initialState, action) => {
     }
     case 'GET_BOOKS_SUCCESS': {
       const { data } = payload;
+      const booksNorm = bookNormalizer(data);
+      console.log(booksNorm);
       return {
         ...state, books: data, isLoading: false, error: '',
       };
@@ -63,14 +60,6 @@ export default (state = initialState, action) => {
       const filteredBooks = [...books, payload];
       return {
         ...state,
-        newBook: {
-          author: '',
-          country: '',
-          language: '',
-          pages: '',
-          title: '',
-          year: '',
-        },
         books: filteredBooks,
         isLoading: false,
       };
@@ -98,6 +87,10 @@ export default (state = initialState, action) => {
         ],
         isLoading: false,
       };
+    }
+    case 'SET_BEST_BOOK': {
+      const { id } = payload;
+      return { ...state, bestBook: id };
     }
     default:
       return state;

@@ -4,7 +4,6 @@ import {
   put,
   takeLatest,
 } from 'redux-saga/effects';
-import generateID from '../utils/generateID';
 import {
   GET_BOOKS_REQUEST,
   POST_BOOK_REQUEST,
@@ -37,9 +36,8 @@ function* watchGetBooks() {
 
 function* postBook({ payload }) {
   try {
-    const book = Object.assign({ id: generateID() }, payload);
-    yield call(apiBooks.postBook, book);
-    yield put(postBookSuccessAction(book));
+    const response = yield call(apiBooks.postBook, payload);
+    yield put(postBookSuccessAction(response.data));
   } catch (e) {
     yield put(failureAction(e.message));
   }

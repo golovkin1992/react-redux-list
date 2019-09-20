@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import i18next from 'i18next';
 import {
   changeBookPropertyAction,
   putBookRequestAction,
@@ -18,9 +19,9 @@ import {
 } from '../../selectors';
 
 const mapStateToProps = state => ({
-  book: findBookSelector(state),
-  error: errorSelector(state),
-  isLoading: isLoadingSelector(state),
+  book: findBookSelector(state.reducers),
+  error: errorSelector(state.reducers),
+  isLoading: isLoadingSelector(state.reducers),
 });
 
 class BookDetails extends PureComponent {
@@ -89,7 +90,7 @@ class BookDetails extends PureComponent {
                    {
                   fields.map(field => (
                     <div className="book" key={field.name}>
-                      <span className="book__title">{field.label}</span>
+                      <span className="book__title">{i18next.t(`fields.${field.name}`)}</span>
                       {
                     editableField === field.name ? (
                       <input
@@ -114,7 +115,7 @@ class BookDetails extends PureComponent {
                     </div>
                   ))
               }
-                   <Link className="link link_book" to="/"> Назад</Link>
+                   <Link className="link link_book" to="/">{i18next.t('btnBack')}</Link>
                  </div>
                </div>
              )

@@ -7,11 +7,16 @@ export class Book extends PureComponent {
     e.preventDefault();
     const id = e.target.value;
     const { onDeleteBook } = this.props;
-    onDeleteBook(id);
+    onDeleteBook(+id);
   }
 
   render() {
-    const { id, title, author } = this.props;
+    const {
+      onTranslate,
+      id,
+      title,
+      author,
+    } = this.props;
     return (
       <li>
         <div className="book-item">
@@ -21,7 +26,7 @@ export class Book extends PureComponent {
               className="details"
               to={`/books/${id}`}
             >
-            Details
+              {onTranslate('btnDetails')}
             </Link>
             <button
               className="btn btn_delete-book"
@@ -29,7 +34,7 @@ export class Book extends PureComponent {
               value={id}
               onClick={this.handleClick}
             >
-            Delete
+              {onTranslate('btnDelete')}
             </button>
           </div>
           <span className="book-item__title">{title}</span>
@@ -40,6 +45,7 @@ export class Book extends PureComponent {
   }
 }
 Book.propTypes = {
+  onTranslate: PropTypes.func.isRequired,
   onDeleteBook: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

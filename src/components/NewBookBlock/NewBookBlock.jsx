@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Field from './Field';
+import { reduxForm, Field } from 'redux-form';
 import fields from '../../constants/Fields';
 import './Fields.sass';
+import RenderField from './RenderField';
 
-export default class NewBookBlock extends Component {
+class NewBookBlock extends Component {
   state = {
     isVisibleForm: false,
   }
+
+  styles = {
+    styleInput: {
+      width: '100px',
+    },
+  };
 
   handleClick = (e) => {
     e.preventDefault();
@@ -23,16 +30,17 @@ export default class NewBookBlock extends Component {
   render() {
     const { isVisibleForm } = this.state;
     const {
-      newBook,
-      onChangeNewBook,
-      hasEmptyFields,
-      isLoading,
+      reset,
+      handleSubmit,
+      pristine,
+      submitting,
+      onTranslate,
     } = this.props;
     return (
       <div
         className="add-books-block"
       >
-        <span>Добавить книги</span>
+        <span>{onTranslate('addBooks')}</span>
         <button
           className="btn btn_add-book btn_toggle-book-form"
           type="button"
@@ -40,38 +48,61 @@ export default class NewBookBlock extends Component {
         >
         +
         </button>
-        { isVisibleForm && (
-        <div className="fields">
-          {fields.map(field => (
-            <Field
-              key={field.name}
-              onChangeNewBook={onChangeNewBook}
-              name={field.name}
-              value={newBook[field.name]}
-              label={field.label}
-              options={field.options}
-              isDropDown={field.isDropDown}
-            />
-          ))}
-          <button
-            className="btn btn_add-book"
-            onClick={this.handleClick}
-            type="submit"
-            disabled={hasEmptyFields || isLoading}
+        {
+          isVisibleForm && (
+          <form
+            className="fields"
+            onSubmit={handleSubmit}
           >
-          Добавить
-          </button>
-        </div>
-        )}
+            {
+            fields.map(field => (
+              <div className="field">
+                <Field
+                  key={field.name}
+                  name={field.name}
+                  component={RenderField}
+                  hintText={onTranslate(`fields.${field.name}`)}
+                  floatingLabelText={onTranslate(`fields.${field.name}`)}
+                  autoComplete="off"
+                  style={{ width: '100%' }}
+                  options={field.options}
+                  validate={field.validate}
+                  onTranslate={onTranslate}
+                />
+              </div>
+            ))}
+            <button
+              className="btn btn_add-book"
+              type="submit"
+              disabled={submitting}
+            >
+              {onTranslate('btnAdd')}
+            </button>
+            <button
+              className="btn btn_add-book"
+              type="button"
+              disabled={pristine || submitting}
+              onClick={reset}
+            >
+              {onTranslate('btnClear')}
+            </button>
+          </form>
+
+          )}
       </div>
 
     );
   }
 }
+
 NewBookBlock.propTypes = {
+  onTranslate: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
   onPostBook: PropTypes.func.isRequired,
-  onChangeNewBook: PropTypes.func.isRequired,
-  hasEmptyFields: PropTypes.bool.isRequired,
   newBook: PropTypes.objectOf(PropTypes.object).isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  pristine: PropTypes.bool.isRequired,
+  submitting: PropTypes.bool.isRequired,
 };
+
+export default reduxForm({ form: 'bookForm' })(NewBookBlock);

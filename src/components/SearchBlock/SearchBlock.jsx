@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import './SearchBlock.sass';
 
+
 class SearchBlock extends PureComponent {
   componentDidMount() {
     this.handleLocationChange();
@@ -39,12 +40,40 @@ class SearchBlock extends PureComponent {
     } else history.push('/');
   }
 
+  handleChangeLanguage = (e) => {
+    const { i18n } = this.props;
+    i18n.changeLanguage(e.target.value);
+  }
+
   render() {
-    const { value } = this.props;
+    const {
+      value,
+      onTranslate,
+    } = this.props;
     return (
       <Fragment>
-        <header>
-          <h1 className="header-title">Simple BookList</h1>
+        <header className="header-wrap">
+          <h1 className="header-title">{onTranslate('title')}</h1>
+          <div className="btn-wrap">
+            <button
+              value="de"
+              type="button"
+              onClick={this.handleChangeLanguage}
+              className="btn-lng btn-lng_de"
+            />
+            <button
+              value="en"
+              type="button"
+              onClick={this.handleChangeLanguage}
+              className="btn-lng btn-lng_en"
+            />
+            <button
+              value="ru"
+              type="button"
+              onClick={this.handleChangeLanguage}
+              className="btn-lng btn-lng_ru"
+            />
+          </div>
         </header>
         <div className="search-field">
           <input
@@ -52,7 +81,7 @@ class SearchBlock extends PureComponent {
             onChange={this.handleChange}
             type="search"
             value={value}
-            placeholder="Введите название книги для поиска"
+            placeholder={onTranslate('placeholderSearch')}
           />
         </div>
       </Fragment>
@@ -60,6 +89,8 @@ class SearchBlock extends PureComponent {
   }
 }
 SearchBlock.propTypes = {
+  i18n: PropTypes.func.isRequired,
+  onTranslate: PropTypes.func.isRequired,
   onChangeFilter: PropTypes.func.isRequired,
   history: PropTypes.objectOf(PropTypes.object).isRequired,
   value: PropTypes.string.isRequired,

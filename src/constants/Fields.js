@@ -1,34 +1,33 @@
 import languages from './languagesList';
 import countries from './Countries';
+import { required, numbers } from '../utils/validate';
 
 const fields = [
   {
     name: 'title',
-    label: 'Название:',
+    validate: required,
   },
   {
     name: 'country',
-    label: 'Страна издания:',
-    isDropDown: true,
     options: countries,
+    validate: required,
   },
   {
     name: 'language',
-    label: 'Язык:',
-    isDropDown: true,
     options: languages,
+    validate: required,
   },
   {
     name: 'pages',
-    label: 'Страниц:',
+    validate: [required, numbers],
   },
   {
     name: 'author',
-    label: 'Автор:',
+    validate: required,
   },
   {
     name: 'year',
-    label: 'Год издания:',
+    validate: required,
   },
 ];
 export default fields;

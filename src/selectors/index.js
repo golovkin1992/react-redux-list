@@ -2,10 +2,13 @@ import { createSelector } from 'reselect';
 
 const getFilter = state => state.filter;
 const getError = state => state.error;
+/* /const getBooks = (state) => {
+  return denormalize({ books: [1, 2] }, mySchema, state.books.entities);
+};/ */
 const getBooks = state => state.books;
-const getNewBook = state => state.newBook;
 const getBook = state => state.book;
 const getIsLoading = state => state.isLoading;
+// const getBestBook = state => state.bestBook;
 
 
 export const visibleBooksSelector = createSelector(
@@ -16,16 +19,6 @@ export const visibleBooksSelector = createSelector(
     }
     return books.filter(el => el.title.indexOf(filter) > -1);
   },
-);
-
-export const hasEmptyFieldsSelector = createSelector(
-  getNewBook,
-  newBook => Object.keys(newBook).some(item => newBook[item] === ''),
-);
-
-export const newBookSelector = createSelector(
-  getNewBook,
-  newBook => newBook,
 );
 
 export const filterSelector = createSelector(

@@ -1,15 +1,49 @@
+.header-wrap
+  display: flex
+  align-items: center
+  justify-content: space-between
+  width: 580px
 .header-title
   width: 400px
+  margin-left: 20px
   font-size: 40px
   color: #165A5A
-  text-align: center
-  margin: 0 auto 10px auto
+
+.btn-wrap
+  display: flex
+  width: 110px
+  justify-content: space-between
+  
+  
 .search-field
   width: 310px
   margin: 0 auto
-    
+
+.btn-lng
+  width: 32px
+  height: 32px
+  border: none
+  padding: 0
+  font: inherit
+  color: inherit
+  background-color: transparent
+  background-repeat: no-repeat
+  background-position: center
+  &:hover
+    cursor: pointer
+  &:active
+    outline: none
+  &:focus
+    outline: none
+  &_de
+    background-image: url("../../assets/images/iconfinder_Germany-Flag_32223.png")
+  &_en
+    background-image: url("../../assets/images/iconfinder_United-Kingdom-flag_32363.png")
+  &_ru
+    background-image: url("../../assets/images/iconfinder_Russia-Flag_32315.png")
+
 .search-input
-  width: 310px
+  width: 350px
   height: 30px
   &:focus
     outline: none
