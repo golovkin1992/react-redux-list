@@ -1,0 +1,24 @@
+{
+  "title": "Cписок книг",
+  "placeholderSearch":
+      "Введите название книги для поиска",
+  "addBooks": "Добавить книги",
+  "btnAdd": "Добавить",
+  "btnClear": "Очистить",
+  "titleList": "Список книг:",
+  "btnDetails": "Детали",
+  "btnDelete": "Удалить",
+  "fields": {
+      "title": "Название:",
+      "country": "Страна публикации:",
+      "language": "Язык:",
+      "pages": "Страниц:",
+      "author": "Автор:",
+      "year": "Год публикации:",
+      "errors": {
+        "required": "обязательное",
+        "onlyNumbers": "только цифры!"
+      }
+    },
+  "btnBack": "Назад"
+}

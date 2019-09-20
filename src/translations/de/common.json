@@ -1,0 +1,24 @@
+{
+    "title": "Einfache Bücherliste",
+    "placeholderSearch":
+      "Geben Sie den Namen des zu durchsuchenden Buches ein",
+    "btnAdd": "Hinzufügen",
+    "btnClear": "Klar", 
+    "addBooks": "Bücher hinzufügen",
+    "titleList": "Buchliste:",
+    "btnDetails": "die Details",
+    "btnDelete": "Entfernen",
+    "fields": {
+        "title": "Titel:",
+        "country": "Land der Veröffentlichung:",
+        "language": "Sprache:",
+        "pages": "Seiten:",
+        "author": "Gepostet von",
+        "year": "Erscheinungsjahr:",
+        "errors": {
+          "required": "erforderlich",
+          "onlyNumbers": "nur zahlen!"
+        }
+    },
+    "btnBack": "Zurück"
+}

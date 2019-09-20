@@ -1,0 +1,24 @@
+{
+  "title": "Simple Booklist",
+  "placeholderSearch":
+      "Enter the name of the book to search",
+  "addBooks": "Add books",
+  "btnAdd": "Add",
+  "btnClear": "Clear",
+  "titleList": "Book list:",
+  "btnDetails": "Details",
+  "btnDelete": "Delete",
+  "fields": {
+      "title": "Title:",
+      "country": "Country of publication:",
+      "language": "Language:",
+      "pages": "Pages:",
+      "author": "Author:",
+      "year": "The year of publishing:",
+      "errors": {
+        "required": "required",
+        "onlyNumbers": "only numbers!"
+      }
+    },
+  "btnBack": "Back"
+}
